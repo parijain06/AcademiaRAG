@@ -7,11 +7,17 @@ collection = client.get_or_create_collection(
 )
 
 
-def add_document(chunk_id, text, embedding):
+def add_document(chunk_id, text, embedding, page=None, filename=None):
     collection.add(
         ids=[str(chunk_id)],
         documents=[text],
-        embeddings=[embedding]
+        embeddings=[embedding],
+        metadatas=[
+            {
+                "page": page,
+                "filename": filename
+            }
+        ]
     )
 def search_semantic(query_embedding, top_k=3):
     results = collection.query(
