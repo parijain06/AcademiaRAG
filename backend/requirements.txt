@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+python-multipart
+oracledb
+python-dotenv
+rank-bm25
+sentence-transformers
+pypdf
+ollama
+chromadb
