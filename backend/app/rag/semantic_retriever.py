@@ -22,7 +22,17 @@ def add_document(chunk_id, text, embedding, page=None, filename=None):
 def search_semantic(query_embedding, top_k=3):
     results = collection.query(
         query_embeddings=[query_embedding],
-        n_results=top_k
+        n_results=top_k,
+        include=["documents", "metadatas", "distances"]
+    )
+
+    return results
+
+    
+
+def get_all_documents():
+    results = collection.get(
+        include=["documents", "metadatas"]
     )
 
     return results

@@ -15,7 +15,7 @@ def create_bm25_index(documents):
     return BM25Okapi(tokenized_documents)
 
 
-def search_bm25(bm25, query, documents, top_k=3):
+def search_bm25(bm25, query, documents, metadata, top_k=3):
     tokenized_query = tokenize(query)
 
     scores = bm25.get_scores(tokenized_query)
@@ -29,7 +29,9 @@ def search_bm25(bm25, query, documents, top_k=3):
     return [
         {
             "text": documents[i],
-            "score": float(scores[i])
+            "score": float(scores[i]),
+            "filename": metadata[i].get("filename"),
+            "page": metadata[i].get("page")
         }
         for i in ranked_indexes
     ]
